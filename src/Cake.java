@@ -1,35 +1,27 @@
-public class Cake {
-    private String name;
-    private double weight;
-    private double value_for_kg;
+public class Cake extends Pastry {
 
-    public Cake(String name, double weight, double value_for_kg) {
-        this.setName(name);
-        this.setWeight(weight);
-        this.setValueForKg(value_for_kg);
+    private String customMessage;
+
+    public Cake() {
+        super("Standard b-day cake",2.0, 100.0);
+        this.setCustomMessage("Happy Birthday");
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Cake(String customMessage) {
+        super("Custom b-day cake",2.0, 110.0);
+        this.setCustomMessage(customMessage);
     }
 
-    public String getName() {
-        return this.name;
+    public Cake(double weight, double value_for_kg, String customMessage) {
+        super("Special cake", weight, value_for_kg);
+        this.setCustomMessage(customMessage);
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setCustomMessage(String customMessage) {
+        this.customMessage = customMessage;
     }
 
-    public double getWeight() {
-        return this.weight;
-    }
-
-    public void setValueForKg(double value_for_kg) {
-        this.value_for_kg = value_for_kg;
-    }
-
-    public double getValueForKg() {
-        return this.value_for_kg;
+    public String getCustomMessage() {
+        return this.customMessage;
     }
 }
