@@ -3,14 +3,14 @@ public class Pie extends  Pastry{
     boolean isVegan;
     boolean isFitOffer;
 
-    public Pie(String name, double weight, double value_for_kg) {
-        super(name, weight, value_for_kg);
+    public Pie(Integer id, String name, double weight, double value_for_kg) {
+        super(id, name, weight, value_for_kg);
         this.setIsVegan(false);
         this.setIsFitOffer(false);
     }
 
-    public Pie(String name, double weight, double value_for_kg, boolean isFitOffer, boolean isVegan) {
-        super(name, weight, value_for_kg);
+    public Pie(Integer id, String name, double weight, double value_for_kg, boolean isFitOffer, boolean isVegan) {
+        super(id, name, weight, value_for_kg);
         this.setIsVegan(isVegan);
         this.setIsFitOffer(isFitOffer);
     }

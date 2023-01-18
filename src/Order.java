@@ -2,27 +2,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
-    private int id;
     private Date date_of_order;
     private Date date_of_receipt;
     private ArrayList<Cake> cakes;
     private Client client;
 
-    public Order(int id, Date date_of_order, Date date_of_receipt, Cake cake, Client client) {
-        this.setId(id);
+    private boolean paid;
+
+    public Order(Date date_of_order, Date date_of_receipt, Cake cake, Client client, boolean paid) {
         this.setDate_of_order(date_of_order);
         this.setDate_of_receipt(date_of_receipt);
         this.setCakes();
         this.addCakeToOrder(cake);
         this.setClient(client);
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return this.id;
+        this.setPaid(paid);
     }
 
     public void setDate_of_order(Date date_of_order) {
@@ -61,14 +54,11 @@ public class Order {
         this.cakes.add(cake);
     }
 
-    public ArrayList<Cake> searchOrder(int id) {
-        ArrayList<Cake> outputArray = new ArrayList<Cake>();
-        for (Cake cake: this.cakes) {
-             if(cake.getId() == id) {
-                 outputArray.add(cake);
-             }
-        }
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
 
-        return outputArray;
+    public boolean getPaid() {
+        return this.paid;
     }
 }

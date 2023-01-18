@@ -1,18 +1,29 @@
 public class Client {
+    Integer id;
     private String name;
     private String surname;
     private Address address;
 
-    public Client(String name, String surname, Address address) {
+    public Client(Integer id, String name, String surname, Address address) {
+        this.setId(id);
         this.setName(name);
         this.setSurname(surname);
         this.address = address;
     }
 
-    public Client(String name, String surname, String city, String postalCode, String street, int houseNumber) {
+    public Client(Integer id, String name, String surname, String city, String postalCode, String street, int houseNumber) {
+        this.setId(id);
         this.setName(name);
         this.setSurname(surname);
         this.setAddress(city, postalCode, street, houseNumber);
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public void setName(String name) {

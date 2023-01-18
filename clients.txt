@@ -1,0 +1,5 @@
+Client_ID	Client_name	Client_surname	Address_city    Address_postalCode	Address_street	Address_houseNumber
+5	Kacper	Polak	Kartuzy	83-300	Gdańska	52
+55	Kacper	Polak	Gdańsk	83-300	Gdańska	152
+45	Kacper	Polak	Gdańsk	83-300	Gdańska	152
+445	Kacper	Polak	Kartuzy	83-300	Gdańska	52

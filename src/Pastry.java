@@ -1,21 +1,22 @@
 public abstract class Pastry {
-    private int id;
+
+    private Integer id;
     private String name;
     private double weight;
     private double value_for_kg;
 
-    public Pastry(int id, String name, double weight, double value_for_kg) {
+    public Pastry(Integer id, String name, double weight, double value_for_kg) {
         this.setId(id);
         this.setName(name);
         this.setWeight(weight);
         this.setValueForKg(value_for_kg);
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     public void setName(String name) {
