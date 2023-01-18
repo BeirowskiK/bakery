@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -50,7 +51,13 @@ public class Main {
         bakery.addClient(c3);
         bakery.addClient(c4);
 
+        Cake cake = new Cake(5);
+        Order order1 = new Order(1,new Date(2023,1,18),new Date(2023,1,20), cake, c3, false);
+
+        bakery.addOrder(order1);
+        order1.addCakeToOrder(cake);
 
         bakery.saveClients();
+        bakery.saveOrders();
     }
 }

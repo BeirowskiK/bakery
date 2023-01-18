@@ -1,10 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class BakeryShop {
 
@@ -34,6 +31,10 @@ public class BakeryShop {
 
     public HashMap<Integer, Order> getOrders() {
         return this.orders;
+    }
+
+    public void addOrder(Order order) {
+        this.orders.put(order.getId(), order);
     }
 
     public void setClients() {
@@ -100,6 +101,39 @@ public class BakeryShop {
                         c.getValue().getAddress().getHouseNumber());
             }
             clientsOutput.close();
+
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveOrders() {
+        try {
+            PrintStream ordersOutput =  new PrintStream(this.ordersStorage);
+
+            ordersOutput.println("Order_ID\tDate_of_order\tDate_of_receipt\t[Cake_ID:Cake_name:Cake_weight:Cake_value_for_kg:Cake_customMessage;]\tClient_ID\tPaid\tTotal");
+            for (Map.Entry<Integer, Order> o: this.orders.entrySet()) {
+                ArrayList<Cake> cakes = o.getValue().getCakes();
+                String cakesString = "";
+
+                for (Cake cake: cakes) {
+                    cakesString += cake.getId().toString() + ":" +
+                        cake.getName() + ":" +
+                        cake.getWeight() + ":" +
+                        cake.getValueForKg() + ":" +
+                        cake.getCustomMessage() + ";";
+                }
+
+                ordersOutput.println(o.getValue().getId().toString() + "\t" +
+                                o.getValue().getDate_of_order().toString() + "\t" +
+                                o.getValue().getDate_of_order().toString() + "\t" +
+                                o.getValue().getDate_of_receipt().toString() + "\t" +
+                                cakesString + "\t" +
+                                o.getValue().getClient().getId() + "\t" +
+                                o.getValue().getPaid() + "\t" +
+                                o.getValue().getTotal());
+            }
+            ordersOutput.close();
 
         } catch(FileNotFoundException e) {
             e.printStackTrace();

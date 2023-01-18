@@ -1,0 +1,2 @@
+Order_ID	Date_of_order	Date_of_receipt	Cake_ID:Cake_name:Cake_weight:Cake_value_for_kg:Cake_customMessage;	Client_ID	Paid	Total
+1	Sun Feb 18 00:00:00 CET 3923	Sun Feb 18 00:00:00 CET 3923	Tue Feb 20 00:00:00 CET 3923	5:Standard b-day cake:2.0:100.0:Happy Birthday;5:Standard b-day cake:2.0:100.0:Happy Birthday;	445	false	400.0
