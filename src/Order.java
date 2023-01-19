@@ -1,24 +1,37 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 
 public class Order {
     Integer id;
-    private Date date_of_order;
-    private Date date_of_receipt;
+    private Calendar date_of_order;
+    private Calendar date_of_receipt;
     private ArrayList<Cake> cakes;
     private Client client;
 
     private boolean paid;
     private double total;
 
-    public Order(Integer id, Date date_of_order, Date date_of_receipt, Cake cake, Client client, boolean paid) {
+    public Order(Integer id, int order_year, int order_month, int order_day, int receipt_year, int receipt_month, int receipt_day, Client client, boolean paid) {
         this.setId(id);
-        this.setDate_of_order(date_of_order);
-        this.setDate_of_receipt(date_of_receipt);
+        this.setDate_of_order(order_year, order_month, order_day);
+        this.setDate_of_receipt(receipt_year, receipt_month, receipt_day);
         this.setCakes();
-        this.addCakeToOrder(cake);
         this.setClient(client);
         this.setPaid(paid);
+        this.total = this.calculate();
+    }
+
+    public Order(Integer id, Calendar date_of_order, Calendar date_of_receipt, Client client, ArrayList<Cake> cakes, boolean paid) {
+        this.setId(id);
+        this.date_of_order = date_of_order;
+        this.date_of_receipt = date_of_receipt;
+        this.setCakes();
+        this.setClient(client);
+        this.setPaid(paid);
+        this.cakes = cakes;
         this.total = this.calculate();
     }
 
@@ -30,19 +43,21 @@ public class Order {
         return id;
     }
 
-    public void setDate_of_order(Date date_of_order) {
-        this.date_of_order = date_of_order;
+    public void setDate_of_order(int year, int month, int day) {
+        Calendar orderDate = new GregorianCalendar(year, month - 1, day);
+        this.date_of_order = orderDate;
     }
 
-    public Date getDate_of_order() {
+    public Calendar getDate_of_order() {
         return this.date_of_order;
     }
 
-    public void setDate_of_receipt(Date date_of_receipt) {
-        this.date_of_receipt = date_of_receipt;
+    public void setDate_of_receipt(int year, int month, int day) {
+        Calendar receiptDate = new GregorianCalendar(year, month - 1, day);
+        this.date_of_receipt = receiptDate;
     }
 
-    public Date getDate_of_receipt() {
+    public Calendar getDate_of_receipt() {
         return this.date_of_receipt;
     }
 

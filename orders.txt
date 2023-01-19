@@ -1,2 +1,6 @@
-Order_ID	Date_of_order	Date_of_receipt	Cake_ID:Cake_name:Cake_weight:Cake_value_for_kg:Cake_customMessage;	Client_ID	Paid	Total
-1	Sun Feb 18 00:00:00 CET 3923	Sun Feb 18 00:00:00 CET 3923	Tue Feb 20 00:00:00 CET 3923	5:Standard b-day cake:2.0:100.0:Happy Birthday;5:Standard b-day cake:2.0:100.0:Happy Birthday;	445	false	400.0
+Order_ID	Date_of_order	Date_of_receipt	[Cake_name::Cake_weight::Cake_value_for_kg::Cake_customMessage;]	Client_ID	Paid	Total
+1	2023 01 19	2023 01 19	Custom b-day cake::2.0::110.0::Mój napis na torcie;Custom b-day cake::2.0::110.0::Mój napis na torcie2;Custom b-day cake::2.0::110.0::Mój napis na torcie3;	89	false	660.0
+2	2023 01 19	2023 01 19	Custom b-day cake::2.0::110.0::Mój napis na torcie;Custom b-day cake::2.0::110.0::Mój napis na torcie2;Custom b-day cake::2.0::110.0::Mój napis na torcie3;	93	true	660.0
+3	2023 01 19	2023 01 19	Custom b-day cake::2.0::110.0::Mój napis na torcie;Custom b-day cake::2.0::110.0::Mój napis na torcie2;Custom b-day cake::2.0::110.0::Mój napis na torcie3;	97	true	660.0
+4	2023 01 24	2023 01 19	Custom b-day cake::2.0::110.0::Mój napis na torcie;Custom b-day cake::2.0::110.0::Mój napis na torcie2;Custom b-day cake::2.0::110.0::Mój napis na torcie3;	101	true	660.0
+5	2023 01 13	2023 01 24	Custom b-day cake::2.0::110.0::Mój napis na torcie;Custom b-day cake::2.0::110.0::Mój napis na torcie2;Custom b-day cake::2.0::110.0::Mój napis na torcie3;	105	true	660.0
