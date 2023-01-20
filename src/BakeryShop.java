@@ -1,7 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -9,12 +6,13 @@ public class BakeryShop {
 
     private HashMap<Integer, Order> orders;
     private HashMap<Integer, Client> clients;
-
     private HashMap<Integer, Pie> inventory;
 
     private File clientsStorage;
     private File inventoryStorage;
     private File ordersStorage;
+
+    private Savers savers;
 
     public BakeryShop(File clientsStorage, File inventoryStorage, File ordersStorage) {
         this.setOrders();
@@ -25,9 +23,12 @@ public class BakeryShop {
         this.inventoryStorage = inventoryStorage;
         this.ordersStorage = ordersStorage;
 
-        this.clients = this.parseClients(clientsStorage);
-        this.inventory = this.parseInventory(inventoryStorage);
-        this.orders = this.parseOrders(ordersStorage);
+        Parsers parsers = new Parsers();
+        this.clients = parsers.parseClients(clientsStorage);
+        this.inventory = parsers.parseInventory(inventoryStorage);
+        this.orders = parsers.parseOrders(ordersStorage, this.clients);
+
+        this.savers = new Savers();
     }
 
     public void setOrders() {
@@ -44,7 +45,9 @@ public class BakeryShop {
         this.orders.put(order.getId(), order);
     }
 
-
+    public void saveOrders() {
+        this.savers.saveOrders(this.ordersStorage, this.orders);
+    }
 
     public void setClients() {
         if (this.clients == null) {
@@ -60,7 +63,9 @@ public class BakeryShop {
         this.clients.put(client.getId(), client);
     }
 
-
+    public void saveClients() {
+        this.savers.saveClients(this.clientsStorage, this.clients);
+    }
 
     public void setInventory() {
         if (this.inventory == null) {
@@ -74,6 +79,10 @@ public class BakeryShop {
 
     public void appendInventory(Pie pie) {
         this.inventory.put(pie.getId(), pie);
+    }
+
+    public void saveInventory() {
+        this.savers.saveClients(this.clientsStorage, this.clients);
     }
 
     // *** ID generators ***
@@ -173,192 +182,6 @@ public class BakeryShop {
         return this.inventoryStorage;
     }
 
-
-
-
-    // *** EXPROT DATA TO FILE ***
-
-    public void saveClients() {
-        try {
-            PrintStream clientsOutput =  new PrintStream(this.clientsStorage);
-
-            clientsOutput.println("Client_ID\tClient_name\tClient_surname\tAddress_city\tAddress_postalCode\tAddress_street\tAddress_houseNumber");
-            for (Map.Entry<Integer, Client> c: this.clients.entrySet()) {
-                clientsOutput.println(c.getValue().getId().toString() + "\t" +
-                        c.getValue().getName() + "\t" +
-                        c.getValue().getSurname() + "\t" +
-                        c.getValue().getAddress().getCity() + "\t" +
-                        c.getValue().getAddress().getPostalCode() + "\t" +
-                        c.getValue().getAddress().getStreet() + "\t" +
-                        c.getValue().getAddress().getHouseNumber());
-            }
-            clientsOutput.close();
-
-        } catch(FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void saveOrders() {
-
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM d");
-            PrintStream ordersOutput =  new PrintStream(this.ordersStorage);
-
-            ordersOutput.println("Order_ID\tDate_of_order\tDate_of_receipt\t[Cake_name::Cake_weight::Cake_value_for_kg::Cake_customMessage;]\tClient_ID\tPaid\tTotal");
-            for (Map.Entry<Integer, Order> o: this.orders.entrySet()) {
-                ArrayList<Cake> cakes = o.getValue().getCakes();
-                String cakesString = "";
-
-                for (Cake cake: cakes) {
-                    cakesString += cake.getName() + "::" +
-                        cake.getWeight() + "::" +
-                        cake.getValueForKg() + "::" +
-                        cake.getCustomMessage() + ";";
-                }
-
-                String date_of_order = sdf.format(o.getValue().getDate_of_order().getTime());
-                String date_of_receipt = sdf.format(o.getValue().getDate_of_receipt().getTime());
-
-                ordersOutput.println(o.getValue().getId().toString() + "\t" +
-                                date_of_order + "\t" +
-                                date_of_receipt + "\t" +
-                                cakesString + "\t" +
-                                o.getValue().getClient().getId() + "\t" +
-                                o.getValue().getPaid() + "\t" +
-                                o.getValue().getTotal());
-            }
-            ordersOutput.close();
-
-        } catch(FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void saveInventory() {
-        try {
-            PrintStream inventoryOutput =  new PrintStream(this.inventoryStorage);
-
-            inventoryOutput.println("Pie_ID\tPie_name\tPie_weight\tPie_value_for_kg");
-
-            for (Map.Entry<Integer, Pie> p: this.inventory.entrySet()) {
-                inventoryOutput.println(
-                        p.getValue().getId().toString() + "\t" +
-                                p.getValue().getName() + "\t" +
-                                p.getValue().getWeight() + "\t" +
-                                p.getValue().getValueForKg()
-                );
-            }
-            inventoryOutput.close();
-
-        } catch(FileNotFoundException e) {
-                e.printStackTrace();
-        }
-    }
-
-
-
-    // *** PARSE DATA FROM FILE
-
-    public HashMap<Integer, Client> parseClients(File file) {
-        HashMap<Integer, Client> output = new HashMap<Integer, Client>();
-        try {
-            Scanner scanner = new Scanner(file);
-            if(scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] fields = line.split("\t");
-
-                Address address = new Address(fields[3], fields[4], fields[5], Integer.parseInt(fields[6]));
-                Client client = new Client(Integer.parseInt(fields[0]), fields[1], fields[2], address);
-
-                output.put(client.getId(), client);
-            }
-        } catch(FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return output;
-    }
-
-    public HashMap<Integer, Pie> parseInventory(File file) {
-        HashMap<Integer, Pie> output = new HashMap<Integer, Pie>();
-        try {
-            Scanner scanner = new Scanner(file);
-            if(scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] fields = line.split("\t");
-
-                Pie pie = new Pie(Integer.parseInt(fields[0]), fields[1], Double.parseDouble(fields[2]), Double.parseDouble(fields[3]));
-
-                output.put(pie.getId(), pie);
-            }
-        } catch(FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return output;
-    }
-
-    public HashMap<Integer, Order> parseOrders(File file) {
-        HashMap<Integer, Order> output = new HashMap<Integer, Order>();
-        try {
-            Scanner scanner = new Scanner(file);
-            if(scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] fields = line.split("\t");
-                String[] cakes = fields[3].split(";");
-                ArrayList<Cake> cakesList = new ArrayList<Cake>();
-
-
-                for (String cake: cakes) {
-                    String[] cakeProperty = cake.split("::");
-
-                    if(cakeProperty[0].equals("Standard b-day cake")) {
-                        Cake c = new Cake();
-                        cakesList.add(c);
-                    } else if (cakeProperty[0].equals("Custom b-day cake")) {
-                        Cake c = new Cake(cakeProperty[3]);
-                        cakesList.add(c);
-                    }else if (cakeProperty[0].equals("Special cake")) {
-                        Cake c = new Cake(Double.parseDouble(cakeProperty[1]), Double.parseDouble(cakeProperty[2]), cakeProperty[3]);
-                        cakesList.add(c);
-                    }
-                }
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM d");
-                Calendar date_of_order = Calendar.getInstance();
-                date_of_order.setTime(sdf.parse(fields[1]));
-
-                Calendar date_of_receipt = Calendar.getInstance();
-                date_of_order.setTime(sdf.parse(fields[2]));
-
-
-                Order order = new Order(Integer.parseInt(fields[0]), date_of_order, date_of_receipt,
-                        this.clients.get(Integer.parseInt(fields[4])), cakesList, Boolean.parseBoolean(fields[5]));
-
-                output.put(order.getId(), order);
-            }
-        } catch(FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-        return output;
-    }
-
-
     // *** SEARCH METHODS
 
     public HashMap<Integer, Pie> getOnlyFitPies() {
@@ -403,6 +226,33 @@ public class BakeryShop {
         return output;
     }
 
+    public Order getOrderById(Integer id) {
+        return this.orders.get(id);
+    }
+
+    public Pie getPieById(Integer id) {
+        return this.inventory.get(id);
+    }
+
+    public HashMap<Integer, Order> getOrderByDate(int year, int month, int day) {
+        HashMap<Integer, Order> output = new HashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM d");
+        Calendar searchingDate = new GregorianCalendar(year, month, day);
+        String searchingDateString = sdf.format(searchingDate);
+        for (Map.Entry<Integer, Order> order: this.orders.entrySet()) {
+            if(searchingDateString.equals(sdf.format(order.getValue().getDate_of_order()))) {
+                output.put(order.getValue().getId(), order.getValue());
+            }
+        }
+
+        return output;
+    }
+
+    // ***
+
+    public Receipt createNewReceipt() {
+        return new Receipt();
+    }
 
 }
 
