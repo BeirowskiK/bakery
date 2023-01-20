@@ -1,4 +1,8 @@
-import java.text.SimpleDateFormat;
+package bakery;
+
+import bakery.Cake;
+import bakery.Client;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;

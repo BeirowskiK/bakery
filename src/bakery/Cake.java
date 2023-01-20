@@ -1,3 +1,5 @@
+package bakery;
+
 public class Cake extends Pastry {
 
     private String customMessage;

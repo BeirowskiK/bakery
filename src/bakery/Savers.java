@@ -1,3 +1,9 @@
+package bakery;
+
+import bakery.Cake;
+import bakery.Client;
+import bakery.Pie;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

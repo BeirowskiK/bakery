@@ -1,4 +1,8 @@
-public class Pie extends  Pastry{
+package bakery;
+
+import bakery.Pastry;
+
+public class Pie extends Pastry {
 
     Integer id;
     boolean isVegan;

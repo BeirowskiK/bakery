@@ -1,3 +1,5 @@
+package bakery;
+
 public class Address {
     private String city;
     private String postalCode;

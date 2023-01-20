@@ -1,3 +1,5 @@
+package bakery;
+
 public abstract class Pastry {
 
     private String name;

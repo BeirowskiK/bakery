@@ -1,3 +1,7 @@
+package bakery;
+
+import bakery.Address;
+
 public class Client {
     Integer id;
     private String name;

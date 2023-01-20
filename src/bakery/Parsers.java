@@ -1,3 +1,9 @@
+package bakery;
+
+import bakery.Address;
+import bakery.Cake;
+import bakery.Client;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;

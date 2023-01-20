@@ -1,3 +1,5 @@
+import bakery.BakeryShop;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -35,6 +37,7 @@ public class Main {
             }
         }
 
+        BakeryShop bakery = new BakeryShop(clients, inventory, orders);
 
     }
 }
