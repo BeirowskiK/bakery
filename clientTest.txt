@@ -1,0 +1,11 @@
+Client_ID	Client_name	Client_surname	Address_city	Address_postalCode	Address_street	Address_houseNumber
+0	Name0	Surname0	City0	11-111	Street0	0
+1	Name1	Surname1	City1	11-111	Street1	1
+2	Name2	Surname2	City2	11-111	Street2	2
+3	Name3	Surname3	City3	11-111	Street3	3
+4	Name4	Surname4	City4	11-111	Street4	4
+5	Name5	Surname5	City5	11-111	Street5	5
+6	Name6	Surname6	City6	11-111	Street6	6
+7	Name7	Surname7	City7	11-111	Street7	7
+8	Name8	Surname8	City8	11-111	Street8	8
+9	Name9	Surname9	City9	11-111	Street9	9

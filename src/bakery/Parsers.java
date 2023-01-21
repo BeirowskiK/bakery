@@ -6,6 +6,7 @@ import bakery.Client;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +16,14 @@ import java.util.Scanner;
 
 public class Parsers {
     public HashMap<Integer, Client> parseClients(File file) {
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         HashMap<Integer, Client> output = new HashMap<Integer, Client>();
         try {
             Scanner scanner = new Scanner(file);
@@ -39,6 +48,14 @@ public class Parsers {
     }
 
     public HashMap<Integer, Pie> parseInventory(File file) {
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         HashMap<Integer, Pie> output = new HashMap<Integer, Pie>();
         try {
             Scanner scanner = new Scanner(file);
@@ -62,6 +79,14 @@ public class Parsers {
     }
 
     public HashMap<Integer, Order> parseOrders(File file, HashMap<Integer,Client> clients) {
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         HashMap<Integer, Order> output = new HashMap<Integer, Order>();
         try {
             Scanner scanner = new Scanner(file);
@@ -95,7 +120,7 @@ public class Parsers {
                 date_of_order.setTime(sdf.parse(fields[1]));
 
                 Calendar date_of_receipt = Calendar.getInstance();
-                date_of_order.setTime(sdf.parse(fields[2]));
+                date_of_receipt.setTime(sdf.parse(fields[2]));
 
 
                 Order order = new Order(Integer.parseInt(fields[0]), date_of_order, date_of_receipt,

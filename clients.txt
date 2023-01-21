@@ -1,0 +1,3 @@
+Client_ID	Client_name	Client_surname	Address_city	Address_postalCode	Address_street	Address_houseNumber
+1	Test1	Testowy1	City	11-111	Street	111
+2	Test1	Testowy1	City	11-111	Street	111

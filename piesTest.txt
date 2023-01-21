@@ -1,0 +1,11 @@
+Pie_ID	Pie_name	Pie_weight	Pie_value_for_kg
+0	Name0 Pie	0.0	0.0
+1	Name1 Pie	2.0	23.2
+2	Name2 Pie	4.0	46.4
+3	Name3 Pie	6.0	69.6
+4	Name4 Pie	8.0	92.8
+5	Name5 Pie	10.0	116.0
+6	Name6 Pie	12.0	139.2
+7	Name7 Pie	14.0	162.4
+8	Name8 Pie	16.0	185.6
+9	Name9 Pie	18.0	208.79999999999998

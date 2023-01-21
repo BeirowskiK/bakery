@@ -1,0 +1,3 @@
+Order_ID	Date_of_order	Date_of_receipt	[Cake_name::Cake_weight::Cake_value_for_kg::Cake_customMessage;]	Client_ID	Paid	Total
+1	2023 01 24	2023 01 20	Standard b-day cake::2.0::100.0::Happy Birthday;Standard b-day cake::2.0::100.0::Happy Birthday;Standard b-day cake::2.0::100.0::Happy Birthday;	1	false	600.0
+2	2023 01 20	2023 01 24	Standard b-day cake::2.0::100.0::Happy Birthday;Standard b-day cake::2.0::100.0::Happy Birthday;Standard b-day cake::2.0::100.0::Happy Birthday;	1	false	600.0
