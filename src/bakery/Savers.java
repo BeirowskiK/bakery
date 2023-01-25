@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Savers {
+public final class Savers {
     public void saveClients(File clientsStorage, HashMap<Integer, Client> clients) {
         try {
             PrintStream clientsOutput =  new PrintStream(clientsStorage);

@@ -1,6 +1,6 @@
 package bakery;
 
-public class Cake extends Pastry {
+public final class Cake extends Pastry {
 
     private String customMessage;
 

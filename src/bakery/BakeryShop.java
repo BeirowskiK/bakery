@@ -4,7 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class BakeryShop {
+public class BakeryShop implements Shop {
 
     private HashMap<Integer, Order> orders;
     private HashMap<Integer, Client> clients;

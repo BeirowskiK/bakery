@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Parsers {
+public final class Parsers {
     public HashMap<Integer, Client> parseClients(File file) {
         if(!file.exists()) {
             try {
